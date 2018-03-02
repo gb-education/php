@@ -22,7 +22,7 @@
 		<li>var_dump((float)123.0 === (int)123.0); - оператор "===" - TRUE если $a равно $b и имеет тот же тип. В нашем же случае тип данных разный поэтому - false.</p>
 		<li>
 			<p>var_dump((int)0 === (int)'hello, world'); - true потому что один и тот же тип данных и значение, т.к. после преобразования строки "hellow world" значение числа становится 0.<br>
-			<?php echo '<br>Проверка преобразования: (int)/"hello, world/" = '.(int)'hello, world'; ?></p>	
+			<?php echo '<br>Проверка преобразования: (int)&prime;hello, world&prime; = '.(int)'hello, world'; ?></p>	
 		</li>
 	</ul>
 </body>
