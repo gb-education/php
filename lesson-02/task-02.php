@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="task-01.php" method="GET">
+<form action="task-02.php" method="GET">
 	<input type="text" name="a" required>
 	<input type="submit" value="Вывести">
 </form>
