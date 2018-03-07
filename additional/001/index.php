@@ -23,7 +23,7 @@ echo "<br><br>";
 
 for ($i = 0; $i < count ($my_array); ) {
 	$k = rand (0,count ($my_array)-1);
-	if ($tranfer_array[$k] == "") {
+	if (($tranfer_array[$k] == "") && ($k != $i)) {
 		$tranfer_array[$k] = $my_array[$i];
 		echo $i++." ";
 		echo $k."<br>";
@@ -38,6 +38,7 @@ for ($i = 0; $i < count ($tranfer_array); $i++) {
 }
 
 ?>
+<p>Задача выполнена. Немного смущает несовпадение значений в соответствии со счетчиками, по которым была расстановка.</p>
 
 </body>
 </html>
