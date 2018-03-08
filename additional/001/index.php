@@ -23,8 +23,8 @@ echo "<br><br>";
 
 for ($i = 0; $i < count ($my_array); ) {
 	$k = rand (0,count ($my_array)-1);
-	if (($tranfer_array[$k] == "") && ($k != $i)) {
-		$tranfer_array[$k] = $my_array[$i];
+	if (($transfer_array[$k] == "") && ($k != $i)) {
+		$transfer_array[$k] = $my_array[$i];
 		echo $i++." ";
 		echo $k."<br>";
 	}
@@ -33,8 +33,8 @@ for ($i = 0; $i < count ($my_array); ) {
 
 echo "<br><br>";
 
-for ($i = 0; $i < count ($tranfer_array); $i++) {
-	echo $tranfer_array[$i];
+for ($i = 0; $i < count ($transfer_array); $i++) {
+	echo $transfer_array[$i];
 }
 
 ?>
