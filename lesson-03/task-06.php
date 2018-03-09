@@ -20,6 +20,7 @@ $menu = array ("Главная", "Услуги" => array ("Разработка 
 
 echo "<ul>";
 foreach ($menu as $count => $itemname) {
+	// is_array
 	if (gettype($itemname) == "array" ) {
 		echo "<li>".$count."<ul>";
 		foreach ($itemname as $itemname2) {

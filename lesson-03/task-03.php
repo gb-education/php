@@ -28,10 +28,9 @@ $russia = array (
 	"Ленинградская область:" => array ("Санкт-Петербург", "Всеволожск", "Павловск", "Кронштадт"),
 	"Рязанская область:" => array ("Рязань", "Касимов", "Скопин", "Рыбное")
 	);
-	
+/*	
 foreach ($russia as $region => $cities) {
 	echo $region."<br>";
-	//echo array_pop($cities);
 	foreach ($cities as $city) {
 		if ($city == end($cities)) {
 			echo $city."<br>";
@@ -40,6 +39,12 @@ foreach ($russia as $region => $cities) {
 			echo $city.", ";
 		}
 	}
+}
+*/
+
+foreach ($russia as $region => $cities) {
+	echo $region."<br>".implode(', ',$cities)."<br>";
+
 }
 
 ?>

@@ -32,6 +32,7 @@ echo str_replace(" ", "_",$_GET[textme]);
 
 function nospace ($text) {
 	for ($i = 0; $i <= mb_strlen($text) - 1; $i++ ) {
+		//регулярное выражение str_replace();
 		if (mb_substr($text,$i,1) == " ") {
 			$newtext.= "_";
 		}
