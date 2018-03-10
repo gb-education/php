@@ -6,13 +6,12 @@
 	<style rel="stylesheet">
 		html, body {
 			width:100%;
-			height: 100;
+			height: 100%;
 			margin: 0;
 			padding: 0;;
 		}
 		.gallery {
 			margin: 0 auto;
-			height: 100%;
 			max-width: 800px;
 			vertical-align: top;
 			line-height: 0;
