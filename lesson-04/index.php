@@ -13,7 +13,6 @@
 		.gallery {
 			margin: 0 auto;
 			max-width: 800px;
-			vertical-align: top;
 			line-height: 0;
 			text-align: center;
 		}
