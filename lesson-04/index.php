@@ -42,11 +42,12 @@
 <?php
 
 $dir = "gallery/";
-$files = scandir($dir);
-
-foreach ($files as $key => $img_fname) {
-	if (($key >= 2) && (stripos($img_fname,"resize_") === 0)) {
-		echo "<a href='".$dir.str_replace("resize_","",$img_fname)."' target='blank'><img src='".$dir.$img_fname."' alt='".$img_fname."'></a>";
+if (file_exists($dir)) {
+	$files = scandir($dir);
+	foreach ($files as $key => $img_fname) {
+		if (($key >= 2) && (stripos($img_fname,"resize_") === 0)) {
+			echo "<a href='".$dir.str_replace("resize_","",$img_fname)."' target='blank'><img src='".$dir.$img_fname."' alt='".$img_fname."'></a>";
+		}
 	}
 }
 
