@@ -95,11 +95,15 @@ if(isset($_POST['upload'])) {
 		mkdir ($dir, 0755);
 		echo "Директория создана";
 	}
+/*&& (filesize($dir.$_FILES[userfile][tmp_name][$key]) <= 2048000)*/
 	foreach ($_FILES[userfile][name] as $key => $fname) {
-		if(copy($_FILES[userfile][tmp_name][$key],$dir.$_FILES[userfile][name][$key]))
-		{
-			exec("convert ".$dir.$_FILES[userfile][name][$key]." -resize x300 -resize \"300x<\" -resize 50% -gravity center -crop 150x150+0+0 +repage ".$dir."resize_".$_FILES[userfile][name][$key]);
-			//ImageMagick
+		$info = pathinfo($fname);
+		if ((($info['extension'] == "jpg") || ($info['extension'] == "jpeg") || ($info['extension'] == "gif") || ($info['extension'] == "png")) && (filesize($_FILES[userfile][tmp_name][$key]) <= 2048000)) {
+			if(copy($_FILES[userfile][tmp_name][$key],$dir.$_FILES[userfile][name][$key]))
+			{
+				exec("convert ".$dir.$_FILES[userfile][name][$key]." -resize x300 -resize \"300x<\" -resize 50% -gravity center -crop 150x150+0+0 +repage ".$dir."resize_".$_FILES[userfile][name][$key]);
+				//ImageMagick
+			}
 		}
 	}
 echo "Готово!";
