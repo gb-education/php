@@ -36,7 +36,7 @@ foreach ($file_list as $key => $filename) {
 			$str = fgets($file);
 			if (mb_strpos($str,$search_str)) {
 			$str = str_replace($search_str, "<b>".$search_str."</b>" , $str);
-			$search_count++;
+			$search_count += mb_substr_count($str,$search_str);
 			$buffer.= $res_str_count++.") ".$filename." - ".$str."<br>\n<br>\n";
 		   }
 		}
