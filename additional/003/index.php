@@ -13,13 +13,16 @@ include('header.html');
 
 //echo file_get_contents ( "file.txt" );
 
-$filename = "files/file_03.txt";
+//$filename = "files/file_03.txt";
 $search_str = $_POST['search_text'];;
 
 
 $file_list = scandir ("files");
 
 //print_r ($file_list);
+
+$search_count = 0;
+$res_str_count = 1;
 
 foreach ($file_list as $key => $filename) {
 	$filename = "files/".$filename;
@@ -31,9 +34,10 @@ foreach ($file_list as $key => $filename) {
 		
 		while (!feof($file)) {
 			$str = fgets($file);
-			if (mb_strpos($str,$search_str) !== false){
+			if (mb_strpos($str,$search_str)) {
 			$str = str_replace($search_str, "<b>".$search_str."</b>" , $str);
-			$buffer.= $str."<br>\n<br>\n";
+			$search_count++;
+			$buffer.= $res_str_count++.") ".$filename." - ".$str."<br>\n<br>\n";
 		   }
 		}
 		echo $buffer;
@@ -41,6 +45,8 @@ foreach ($file_list as $key => $filename) {
 	fclose($file);
 	}
 }
+
+echo "Всего результатов найдено: ".$search_count;
 
 //-------------------------------------------
 include('footer.html');
