@@ -24,6 +24,8 @@ $file_list = scandir ("files");
 $search_count = 0;
 $res_str_count = 1;
 
+$main_result = "";
+
 foreach ($file_list as $key => $filename) {
 	$filename = "files/".$filename;
 	//echo $filename;
@@ -40,13 +42,13 @@ foreach ($file_list as $key => $filename) {
 			$buffer.= $res_str_count++.") ".$filename." - ".$str."<br>\n<br>\n";
 		   }
 		}
-		echo $buffer;
+		$main_result .= $buffer;
 		
 	fclose($file);
 	}
 }
 
-echo "Всего результатов найдено: ".$search_count;
+echo "Всего результатов найдено: ".$search_count."<br><br>".$main_result;
 
 //-------------------------------------------
 include('footer.html');
