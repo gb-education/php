@@ -8,8 +8,15 @@ if (mysqli_connect_errno()) {
 }
 
 function view_count ($fname,$connect_db) {
-	echo $fname;
+	//echo $fname;
 	mysqli_query($connect_db,"UPDATE images SET view_count = view_count + 1  WHERE url_img = '".$fname."';");
+
+	//$sql = "SELECT view_count FROM images WHERE name IN ('".$fname."')"; //SELECT нужное поле FROM table WHERE field2=...
+	$sql = "SELECT * FROM `images` WHERE `url_img` = '".$fname."';";
+	$res = mysqli_query($connect_db,$sql);
+	while($data_img = mysqli_fetch_assoc($res)) {
+		echo "Просмотров: ".$data_img['view_count'];
+	}
 }
 
 /*
@@ -37,13 +44,8 @@ function check_file_in_db ($file_name,$db_connect) {
 	}
 }
 
-
-
 //echo check_file_in_db ("1gallery_img_04.jpg",$connect_db);
-
 //print_r (mysqli_fetch_assoc(mysqli_query($connect_db,"SELECT * FROM images WHERE name IN ('".$_FILES[userfile][name][$key]."');")));
-
-
 
 // загрузка изображений с занесением записей в БД
 if((isset($_POST['upload'])) && ($_FILES[userfile][name][0]) != "") {
@@ -51,29 +53,26 @@ if((isset($_POST['upload'])) && ($_FILES[userfile][name][0]) != "") {
 	$dir_tmp = galley_tmp;
 	chkdir ($dir);
 	chkdir($dir_tmp);
-/*$sql = "SELECT * FROM images WHERE name IN ('".$_FILES[userfile][name][$key]."')";
-$res = mysqli_query($connect_db,$sql);
-print_r ($data = mysqli_fetch_assoc($res));*/
+	/*$sql = "SELECT * FROM images WHERE name IN ('".$_FILES[userfile][name][$key]."')";
+	$res = mysqli_query($connect_db,$sql);
+	print_r ($data = mysqli_fetch_assoc($res));*/
 
 	foreach ($_FILES[userfile][name] as $key => $fname) {
 		$info = pathinfo($fname)['extension'];
 
-$tmp_file_name = $_FILES[userfile][tmp_name][$key];
-$file_name = $_FILES[userfile][name][$key];
-$cropped_file_url = $dir_tmp."resize_".$file_name;
+		$tmp_file_name = $_FILES[userfile][tmp_name][$key];
+		$file_name = $_FILES[userfile][name][$key];
+		$cropped_file_url = $dir_tmp."resize_".$file_name;
 
 		if ((mb_strpos($upload_file_type,$info) > -1) && (filesize($tmp_file_name) <= $max_file_upload)) {
 			if (check_file_in_db ($file_name,$connect_db) === true)
 			{
-//"."asd".$_FILES[userfile][name][$key]."
+				//"."asd".$_FILES[userfile][name][$key]."
 				//SELECT SupplierName FROM Suppliers WHERE EXISTS (SELECT ProductName FROM Products WHERE SupplierId = Suppliers.supplierId AND Price < 20);
-echo $file_name;
-echo check_file_in_db ($file_name,$connect_db);
-//SELECT cnum, cname, city FROM Customers WHERE EXISTS ( SELECT * FROM Customers WHERE city = 'Москва');
-
-				
-
-//"INSERT INTO `images` (`name`,`url_img`,`url_img_cropped`) VALUES ('".$file_name."','".$dir.$file_name."','".$cropped_file_url.");");
+				//echo $file_name;
+				//echo check_file_in_db ($file_name,$connect_db);
+				//SELECT cnum, cname, city FROM Customers WHERE EXISTS ( SELECT * FROM Customers WHERE city = 'Москва');
+				//"INSERT INTO `images` (`name`,`url_img`,`url_img_cropped`) VALUES ('".$file_name."','".$dir.$file_name."','".$cropped_file_url.");");
 
 				if (copy($tmp_file_name,$dir.$file_name)) {
 					exec("convert ".$dir.$file_name." -resize x". $crop_img_width * 2 ." -resize \"". $crop_img_height * 2 . "x<\" -resize 50% -gravity center -crop ".$crop_img_height. "x".$crop_img_height."+0+0 +repage ".$cropped_file_url);
@@ -85,18 +84,16 @@ echo check_file_in_db ($file_name,$connect_db);
  			}
 			else
 			{
-				echo "Файл существует";
+				echo "Файл уже существует";
 			}
 		}
 	}
 }
 
 //$sql = "select * from images";
-
 $sql = "SELECT * FROM images ORDER BY view_count DESC";
 $res = mysqli_query($connect_db,$sql);
 while($data_img[] = mysqli_fetch_assoc($res)){}
-
 
 /*
 //проверка записей в БД, проверка записей уменьшенных изображений и их создание

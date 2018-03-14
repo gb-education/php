@@ -10,7 +10,6 @@ include "core/config.php";
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<? echo $_GET['photo']; ?>
   <a href="index.php"> Вернуться в галерею </a>
   <div>
     <img src="<?=$_GET['photo'] ?>">
