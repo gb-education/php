@@ -34,7 +34,7 @@ function chkdir($folder) {
 	}
 }
 
-//функция проверки записи в БД о новом загружаемомо файле
+//функция проверки записи в БД о новом загружаемом файле
 function check_file_in_db ($file_name,$db_connect) {
 	$sql = "SELECT * FROM images WHERE name IN ('".$file_name."')";
 	$res = mysqli_query($db_connect,$sql);
