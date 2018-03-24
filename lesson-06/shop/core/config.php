@@ -6,14 +6,7 @@ define('PASS', '');
 define('DB', 'shop_db');
 
 
-/*
-$connection = mysqli_connect("localhost","root","","shop_db");
-
-
-if (mysqli_connect_error()) {
-    printf("Не удалось подключиться: %s\n", mysqli_connect_error());
-    exit();
-}
-*/
+//переменная для стилей админки, пришлось зафиксировать, иначе стили с разной вложенностью не работают
+$site_root_url = "http://my-shop.loc/";
 
 ?>

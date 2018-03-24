@@ -160,6 +160,9 @@ function pageBuilder($url) {
 				templates_amount($content,"Каталог - ".$array_result[0]['cat_name']);
 				break;
 				//закаончили собирать категорию
+			case "admin":
+				echo "Привет!";
+				break;
 			default:
 				echo "В базе ничего не найдено. Ошибка 404.";
 				break;

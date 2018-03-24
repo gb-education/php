@@ -1,0 +1,16 @@
+AddDefaultCharset UTF-8
+DirectoryIndex index.php
+#Option Indexes FollowSymLinks
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.
+RewriteRule ^(.*) %{REQUEST_URI}/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [NC,OR]
+RewriteCond %{REQUEST_FILENAME} -d [NC]
+RewriteRule .* - [L]
+
+RewriteRule ^(.*)$ ?path=$1 [L,QSA]
+

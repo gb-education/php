@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 23 2018 г., 14:07
+-- Время создания: Мар 24 2018 г., 23:14
 -- Версия сервера: 5.6.38
 -- Версия PHP: 7.1.12
 
@@ -59,8 +59,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `cat_name`, `alias`) VALUES
-(1, 'Квадрокоптеры', 'quadcopters'),
-(2, 'Комплектующие', 'parts');
+(3, 'Кадрокоптеры', 'quadcopters'),
+(4, 'Комплектующие', 'parts'),
+(5, 'Видеооборудование', 'video');
 
 -- --------------------------------------------------------
 
@@ -82,18 +83,18 @@ CREATE TABLE `galleries` (
 
 CREATE TABLE `goods` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `title` varchar(150) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `img` varchar(255) DEFAULT NULL,
   `text` text,
   `price` decimal(9,2) DEFAULT NULL,
   `price_sale` decimal(9,2) DEFAULT NULL,
-  `cat_id` int(11) NOT NULL,
+  `cat_id` int(11) DEFAULT NULL,
   `brand_id` varchar(50) DEFAULT NULL,
   `view_count` int(11) DEFAULT NULL,
-  `pubdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `visible` tinyint(4) NOT NULL DEFAULT '1',
+  `pubdate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `visible` tinyint(4) DEFAULT '1',
   `alias` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -102,11 +103,8 @@ CREATE TABLE `goods` (
 --
 
 INSERT INTO `goods` (`id`, `name`, `title`, `description`, `img`, `text`, `price`, `price_sale`, `cat_id`, `brand_id`, `view_count`, `pubdate`, `visible`, `alias`) VALUES
-(1, 'Квадрокоптер DJI Spark Fly More Combo', NULL, 'Описание 1', '/template/images/DJI-Mavic-drone-small.jpg', 'Текст 1', '1000.00', '950.00', 1, '1', 2, '2018-03-22 00:14:45', 1, 'drone1'),
-(2, 'Квадрокоптер DJI Phantom 4 Pro', NULL, 'Описание 2', '/template/images/DJI-Mavic-drone-small.jpg', 'Текс 2', '2500.00', '1500.00', 1, '1', 3, '2018-03-22 00:14:45', 1, 'drone2'),
-(3, 'Квадрокоптер RC Quadcopter Gimbal', NULL, 'Описание 3', '/template/images/DJI-Phantom-4-drone-small.jpg', 'Текс 3', '3000.00', NULL, 1, '2', 5, '2018-03-22 00:14:45', 1, 'drone3'),
-(4, 'Запчасть для кварокоптера', NULL, NULL, '/template/images/DJI-Phantom-4-drone-small.jpg', NULL, NULL, NULL, 2, '1', 10, '2018-03-22 00:19:45', 10, 'drone4'),
-(6, 'Квадрокоптер DJI Phantom 4 Pro', NULL, 'Описание 2', '/template/images/DJI-Mavic-drone-small.jpg', 'Текс 2', '2500.00', '1500.00', 1, '1', 9, '2018-03-22 00:50:55', 1, 'drone5');
+(1, 'Квадрокоптер DJI Spark Fly More Combo', 'megaupdate2', 'Описание 1', '/template/images/DJI-Mavic-drone-small.jpg', 'Текст 1', '1000.00', '950.00', 3, '', 0, '0000-00-00 00:00:00', 0, 'drone1'),
+(2, 'Квадрокоптер DJI Phantom 4 Pro', 'megaupdate1', 'Описание 2', '/template/images/DJI-Mavic-drone-small.jpg', 'Текс 2Текс 2Текс 2Текс 2Текс 2\r\n', '2560.00', '1700.00', 5, '', 0, '2018-03-24 00:00:00', 0, 'drone2');
 
 -- --------------------------------------------------------
 
@@ -128,6 +126,26 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`id`, `author`, `text`, `prod_id`) VALUES
 (1, '', 'Очень классный дрон. Все нравится.', 1),
 (2, '', 'Для начала сойдет.', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `role` varchar(20) NOT NULL,
+  `login` varchar(20) NOT NULL,
+  `pass` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `role`, `login`, `pass`) VALUES
+(1, 'administrator', 'admin', '4b658245ef904f53bed443f066a7b62e');
 
 --
 -- Индексы сохранённых таблиц
@@ -164,6 +182,12 @@ ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -177,7 +201,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `galleries`
@@ -196,6 +220,12 @@ ALTER TABLE `goods`
 --
 ALTER TABLE `reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
